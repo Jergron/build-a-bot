@@ -4,9 +4,11 @@
       <nav>
         <ul>
           <li class="nav-item">
-            <img class="logo" src="./assets/build-a-bot-logo.png" />
-            Build-a-Bot
-          </li>
+            <router-link class="nav-link" :to="{name: 'Home'}">
+              <img class="logo" src="./assets/build-a-bot-logo.png" />
+                Build-a-Bot
+            </router-link>
+            </li>
         </ul>
       </nav>
     </header>
@@ -55,5 +57,9 @@ ul {
 .logo {
   vertical-align: middle;
   height: 30px;
+}
+.nav-link {
+  text-decoration: none;
+  color: inherit;
 }
 </style>

@@ -1,7 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable no-alert */
 <template>
-  <div class="content">
+ <!-- using "v-if" here to handle an async issue -->
+  <div v-if="availableParts" class="content">
     <div class="preview">
       <CollapsibleSection>
       <div class="preview-content">
@@ -54,13 +55,19 @@
 </template>
 
 <script>
-import availableParts from '../data/parts';
 import createdHookMixin from './created-hook-mixin';
 import PartSelector from './PartSelector.vue';
 import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 export default {
   name: 'RobotBuilder',
+  created() {
+    /*
+      use commit to commit mutations and dispatch to kickoff actions.
+      getParts is defined in the Store.
+    */
+    this.$store.dispatch('getParts');
+  },
   beforeRouteLeave(to, from, next) {
     if (this.addedToCart) {
       next(true);
@@ -74,7 +81,6 @@ export default {
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
-      availableParts,
       addedToCart: false,
       cart: [],
       selectedRobot: {
@@ -88,6 +94,10 @@ export default {
   },
   mixins: [createdHookMixin],
   computed: {
+    availableParts() {
+      /* This will update from the created() lifecycle hook */
+      return this.$store.state.parts;
+    },
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? 'sale-border' : '';
     },

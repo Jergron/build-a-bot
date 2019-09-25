@@ -96,7 +96,7 @@ export default {
   computed: {
     availableParts() {
       /* This will update from the created() lifecycle hook */
-      return this.$store.state.parts;
+      return this.$store.state.robots.parts;
     },
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? 'sale-border' : '';

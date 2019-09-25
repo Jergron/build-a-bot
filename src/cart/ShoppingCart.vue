@@ -56,7 +56,7 @@ export default {
     /* You can't mutate state directly in a Vuex.Store,
         But you can access state directly to read from it. */
     cart() {
-      return this.$store.state.cart;
+      return this.$store.state.robots.cart;
     },
     cartSaleItems() {
       return this.$store.getters.cartSaleItems;

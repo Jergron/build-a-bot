@@ -64,5 +64,9 @@ export default new Router({
     name: 'Parts',
     component: PartInfo,
     props: true,
+    beforeEnter(to, from, next) {
+      const isValidId = Number.isInteger(to.params.id);
+      next(isValidId);
+    },
   }],
 });
